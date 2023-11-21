@@ -1,7 +1,8 @@
 "use client";
 
+import cn from "@/utils/cn";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 interface LinkProps {
@@ -10,11 +11,17 @@ interface LinkProps {
 }
 
 const Links = ({ link, icon }: LinkProps) => {
-  const route = useRouter();
+  const path = usePathname();
 
   return (
     <>
-      <Link className="text-3xl " href={link}>
+      <Link
+        className={cn(
+          "text-onPrimary-20 text-4xl transition-all duration-300 sm:text-5xl ",
+          path === link && "text-onPrimary-40  font-bold  ",
+        )}
+        href={link}
+      >
         {icon}
       </Link>
     </>

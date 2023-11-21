@@ -22,7 +22,7 @@ const Navbar = ({ className, ...props }: NavbarProps) => {
     <>
       <div
         className={cn(
-          "absolute bottom-1 flex w-[90%] justify-center gap-2 rounded-md bg-primary-20 py-2 backdrop-blur-sm",
+          "absolute bottom-0  flex w-full items-center justify-center gap-10 bg-primary-80/10 py-1 backdrop-blur-sm sm:left-[-1.5em]  sm:top-[20vh] sm:h-max sm:w-max sm:flex-col sm:rounded-full sm:px-1 sm:py-28  ",
           className,
         )}
       >
