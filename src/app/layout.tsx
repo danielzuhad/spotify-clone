@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 
-const poppins = Poppins({ weight: "300" });
+const poppins = Poppins({ weight: "300", subsets: ["latin"], preload: false });
 
 export const metadata: Metadata = {
   title: "Spotify Clone",
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <div className=" background relative h-screen w-screen  shadow-sm shadow-primary-20  sm:h-[93vh] sm:rounded-2xl sm:max-xl:w-[85vw] xl:max-w-[70em]">
+        <div className=" background shadow-primary-20 relative h-screen  w-screen shadow-sm  sm:h-[93vh] sm:rounded-2xl sm:max-xl:w-[85vw] xl:max-w-[70em]">
           <Navbar />
           {children}
         </div>

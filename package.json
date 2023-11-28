@@ -10,19 +10,23 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
+    "axios": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "next": "14.0.2",
+    "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "redux-persist": "^6.0.0",
+    "spotify-web-api-node": "^5.0.2",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/spotify-web-api-node": "^5.0.11",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.2",
