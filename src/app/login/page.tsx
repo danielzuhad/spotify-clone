@@ -15,7 +15,7 @@ const Login = () => {
           </h1>
 
           <AuthButton onClick={() => signIn("spotify", { callbackUrl: "/" })}>
-            Sign In
+            Login
           </AuthButton>
         </div>
       </div>

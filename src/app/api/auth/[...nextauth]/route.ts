@@ -34,29 +34,31 @@ const params = {
   scope: scopes,
 };
 
-const queryParamString = new URLSearchParams(params);
-
-const LOGIN_URL = `${SPOTIFY_API}/authorize?${queryParamString.toString()}`;
+const LOGIN_URL =
+  "https://accounts.spotify.com/authorize?" +
+  new URLSearchParams(params).toString();
 
 const refreshAccessToken = async ({ token }: { token: JWT }) => {
   try {
-    const tokenParams = new URLSearchParams();
-    tokenParams.append("grant_type", "refresh_token");
-    tokenParams.append("refresh_token", token.refreshToken as string);
-
-    const response: AxiosResponse<{
-      access_token: string;
-      refresh_token?: string;
-      expires_in: number;
-    }> = await axios.post(`${SPOTIFY_API}/api/token`, tokenParams, {
+    const params = new URLSearchParams();
+    params.append("grant_type", "refresh_token");
+    params.append("refresh_token", token.refreshToken as string);
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
       headers: {
-        Authorization: `Basic ${Buffer.from(
-          `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_SECRET}`,
-        ).toString("base64")}`,
+        Authorization:
+          "Basic " +
+          Buffer.from(
+            process.env.SPOTIFY_CLIENT_ID +
+              ":" +
+              process.env.SPOTIFY_CLIENT_SECRET,
+          ).toString("base64"),
       },
+      body: params,
     });
+    const data = await response.json();
 
-    const data = response.data;
+    console.log({ data });
 
     return {
       ...token,
@@ -65,7 +67,8 @@ const refreshAccessToken = async ({ token }: { token: JWT }) => {
       accessTokenExpires: Date.now() + data.expires_in * 1000,
     };
   } catch (error) {
-    console.error({ error });
+    console.error("Error refreshing access token:", console.error(error));
+    throw error;
   }
 };
 // Spotify End

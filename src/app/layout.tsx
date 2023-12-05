@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import SessionProviders from "@/providers/SessionProviders";
 
-const poppins = Poppins({ weight: "300", subsets: ["latin"], preload: false });
+const poppins = Poppins({ weight: "400", subsets: ["latin"], preload: false });
 
 export const metadata: Metadata = {
   title: "Spotify Clone",
