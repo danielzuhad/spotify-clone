@@ -1,18 +1,24 @@
 import { getServerSession } from "next-auth/next";
 import React from "react";
+import { redirect } from "next/navigation";
+
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import session from "redux-persist/lib/storage/session";
+import Playlist from "@/components/Home/Playlist";
+import Welcome from "@/components/Home/Welcome";
+import { SessionType } from "@/type";
 
 const Home = async () => {
-  const session = await getServerSession(authOptions);
+  const session: SessionType | null = await getServerSession(authOptions);
 
-  console.log({ session });
+  if (!session) {
+    redirect("/login");
+  }
 
   return (
     <>
-      <div>
-        Home
-        {session ? "Session available" : "Session not available"}
+      <div className="flex w-full flex-col items-center p-2">
+        <Welcome user={session.user} />
+        <Playlist accessToken={session?.user?.accessToken} />
       </div>
     </>
   );

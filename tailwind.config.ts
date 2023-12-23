@@ -8,30 +8,20 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      background: "#1B1B1F",
       white: "#ffff",
       black: "#000",
-      surBackground: "#353438",
       error: "#920028",
+
       primary: {
-        "70": "#F585CE",
-        "80": "#FFAEDE",
-        "90": "#FFD8EC",
+        low: "#FFB6D3",
+        default: "#FFB0D0",
+        high: "#FFF9F9",
       },
-      onPrimary: {
-        "20": "#60004B",
-        "30": "#7D1F64",
-        "40": "#9A397D",
-      },
+
       secondary: {
-        "70": "#FF83B3",
-        "80": "#FFB0CB",
-        "90": "#FFD9E3",
-      },
-      onSecondary: {
-        "20": "#640036",
-        "30": "#831C4D",
-        "40": "#A23665",
+        low: "#E5C1CE",
+        default: "#E1BDC9",
+        high: "#FFF9F9",
       },
     },
   },

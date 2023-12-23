@@ -10,11 +10,12 @@ const Login = () => {
     <>
       <div className="flex h-full w-full items-center justify-center">
         <div className="flex flex-col items-center">
-          <h1 className="text-[15em]">
-            <PiSpotifyLogoLight />
-          </h1>
+          <PiSpotifyLogoLight size={250} />
 
-          <AuthButton onClick={() => signIn("spotify", { callbackUrl: "/" })}>
+          <AuthButton
+            className="bg-primary-default/20 px-6 py-4 text-2xl hover:bg-primary-low/50"
+            onClick={() => signIn("spotify", { callbackUrl: "/" })}
+          >
             Login
           </AuthButton>
         </div>

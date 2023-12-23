@@ -4,7 +4,7 @@ import { JWT } from "next-auth/jwt";
 import SpotifyProvider from "next-auth/providers/spotify";
 
 // Spotify & Refresh Token Start
-const SPOTIFY_API = process.env.SPOTIFY_API;
+const SPOTIFY_ACCOUNT = process.env.SPOTIFY_ACCOUNT;
 
 export const scopes = [
   // Users
@@ -35,15 +35,14 @@ const params = {
 };
 
 const LOGIN_URL =
-  "https://accounts.spotify.com/authorize?" +
-  new URLSearchParams(params).toString();
+  `${SPOTIFY_ACCOUNT}/authorize?` + new URLSearchParams(params).toString();
 
 const refreshAccessToken = async ({ token }: { token: JWT }) => {
   try {
     const params = new URLSearchParams();
     params.append("grant_type", "refresh_token");
     params.append("refresh_token", token.refreshToken as string);
-    const response = await fetch("https://accounts.spotify.com/api/token", {
+    const response = await fetch(`${SPOTIFY_ACCOUNT}/api/token`, {
       method: "POST",
       headers: {
         Authorization:
@@ -58,13 +57,11 @@ const refreshAccessToken = async ({ token }: { token: JWT }) => {
     });
     const data = await response.json();
 
-    console.log({ data });
-
     return {
       ...token,
       accessToken: data.access_token,
       refreshToken: data.refresh_token ?? token.refreshToken,
-      accessTokenExpires: Date.now() + data.expires_in * 1000,
+      accessTokenExpires: Date.now() + data.expires_in * 10000,
     };
   } catch (error) {
     console.error("Error refreshing access token:", console.error(error));
