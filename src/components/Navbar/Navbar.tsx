@@ -23,7 +23,7 @@ const Navbar = ({ className, ...props }: NavbarProps) => {
     <>
       <div
         className={cn(
-          "absolute bottom-0 flex w-full items-center justify-center gap-14 py-4  backdrop-blur-sm sm:relative sm:left-0 sm:h-full  sm:w-[120px] sm:flex-col sm:px-2  sm:pb-40",
+          "fixed bottom-0 z-10 flex w-full items-center justify-center gap-14 py-4  backdrop-blur-md  sm:left-0 sm:h-full  sm:w-[120px] sm:flex-col sm:px-2  sm:pb-40",
           className,
         )}
       >
@@ -31,7 +31,10 @@ const Navbar = ({ className, ...props }: NavbarProps) => {
           <Links key={index} icon={link.icon} link={link.link} />
         ))}
 
-        <AuthButton className="icon bg- px-0 text-4xl ">
+        <AuthButton
+          auth="signOut"
+          className="icon bg- px-0 text-4xl sm:text-5xl "
+        >
           <CiLogout />
         </AuthButton>
       </div>

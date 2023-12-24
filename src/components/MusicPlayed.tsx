@@ -3,7 +3,7 @@ import React from "react";
 const MusicPlayed = () => {
   return (
     <>
-      <div className="absolute bottom-24 flex h-[129px] w-[97.5vw] items-center rounded-[5px] bg-white/10 p-2 backdrop-blur-2xl sm:bottom-0 sm:w-full sm:rounded-b-[5px]">
+      <div className="fixed bottom-20 z-20 flex h-[129px] w-full items-center  bg-white/10 p-2 backdrop-blur-3xl sm:bottom-0 ">
         music played
       </div>
     </>

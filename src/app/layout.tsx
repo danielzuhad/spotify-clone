@@ -24,9 +24,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <main className="  bg container relative flex h-screen justify-center overflow-y-auto sm:h-[785px] sm:rounded-[20px] xl:w-[1280px]">
+        <main className="relative flex h-full w-full justify-end overflow-x-hidden">
           {session && <Navbar />}
-          {children}
+          <div className="w-full sm:w-[81vw] md:w-[83vw] lg:w-[85vw] xl:w-[90vw]">
+            {children}
+          </div>
           {session && <MusicPlayed />}
         </main>
       </body>

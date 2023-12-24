@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-color: #1e1a1b;
   max-width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -13,6 +12,10 @@ body {
   justify-content: center;
   position: relative;
   color: white;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 main {

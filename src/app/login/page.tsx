@@ -1,11 +1,18 @@
-"use client";
-
-import AuthButton from "@/components/AuthButton";
-import { signIn } from "next-auth/react";
 import React from "react";
 import { PiSpotifyLogoLight } from "react-icons/pi";
+import { getServerSession } from "next-auth";
 
-const Login = () => {
+import AuthButton from "@/components/AuthButton";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
+
+const Login = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <>
       <div className="flex h-full w-full items-center justify-center">
@@ -14,7 +21,7 @@ const Login = () => {
 
           <AuthButton
             className="bg-primary-default/20 px-6 py-4 text-2xl hover:bg-primary-low/50"
-            onClick={() => signIn("spotify", { callbackUrl: "/" })}
+            auth="signIn"
           >
             Login
           </AuthButton>

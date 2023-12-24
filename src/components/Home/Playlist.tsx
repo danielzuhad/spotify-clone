@@ -1,9 +1,9 @@
 import React from "react";
-import axios from "axios";
 
 import cn from "@/utils/cn";
 import { PlaylistType } from "@/type";
 import Card from "./Card";
+import { axiosInstance } from "@/lib/spotify-api";
 
 interface PlaylistProps {
   className?: string;
@@ -11,7 +11,7 @@ interface PlaylistProps {
 }
 
 const Playlist = async ({ className, accessToken }: PlaylistProps) => {
-  const response = await axios.get("https://api.spotify.com/v1/me/playlists", {
+  const response = await axiosInstance.get("/playlists", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -23,7 +23,7 @@ const Playlist = async ({ className, accessToken }: PlaylistProps) => {
     <>
       <section
         className={cn(
-          " mx-auto grid w-full grid-cols-4 justify-items-center",
+          "  flex h-full w-full flex-wrap justify-evenly gap-5 overflow-y-hidden pb-60 sm:gap-10 sm:pb-48",
           className,
         )}
       >
