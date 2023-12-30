@@ -3,22 +3,14 @@
 @tailwind utilities;
 
 body {
-  max-width: 100vw;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  align-items: center;
   justify-content: center;
-  position: relative;
-  color: white;
+  align-items: center;
+  background-color: #fcf8ff;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
-}
-
-main {
-  background: #47001e;
-  background: linear-gradient(135deg, #47001e, #130008);
 }

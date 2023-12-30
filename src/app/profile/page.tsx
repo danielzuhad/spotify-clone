@@ -3,7 +3,7 @@ import React from "react";
 const Profile = () => {
   return (
     <>
-      <div>profile</div>
+      <div className="w-full">profile</div>
     </>
   );
 };

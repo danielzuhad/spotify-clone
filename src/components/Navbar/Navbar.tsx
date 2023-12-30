@@ -7,6 +7,7 @@ import React from "react";
 import cn from "@/utils/cn";
 import Links from "./Links";
 import AuthButton from "../AuthButton";
+import NavbarLayout from "../Layout/NavbarLayout";
 
 interface NavbarProps extends React.ComponentProps<"div"> {
   className?: string;
@@ -21,23 +22,18 @@ const links = [
 const Navbar = ({ className, ...props }: NavbarProps) => {
   return (
     <>
-      <div
-        className={cn(
-          "fixed bottom-0 z-10 flex w-full items-center justify-center gap-14 py-4  backdrop-blur-md  sm:left-0 sm:h-full  sm:w-[120px] sm:flex-col sm:px-2  sm:pb-40",
-          className,
-        )}
-      >
+      <NavbarLayout>
         {links.map((link, index) => (
           <Links key={index} icon={link.icon} link={link.link} />
         ))}
 
         <AuthButton
           auth="signOut"
-          className="icon bg- px-0 text-4xl sm:text-5xl "
+          className="icon bg- px-0 text-4xl hover:scale-110  "
         >
           <CiLogout />
         </AuthButton>
-      </div>
+      </NavbarLayout>
     </>
   );
 };

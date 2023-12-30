@@ -6,6 +6,7 @@ import SessionProviders from "@/providers/SessionProviders";
 import MusicPlayed from "@/components/MusicPlayed";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import Layout from "@/components/Layout/Layout";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"], preload: false });
 
@@ -24,13 +25,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <main className="relative flex h-full w-full justify-end overflow-x-hidden">
+        <Layout variant="root">
           {session && <Navbar />}
-          <div className="w-full sm:w-[81vw] md:w-[83vw] lg:w-[85vw] xl:w-[90vw]">
-            {children}
-          </div>
+          <Layout variant="page">{children}</Layout>
           {session && <MusicPlayed />}
-        </main>
+        </Layout>
       </body>
     </html>
   );

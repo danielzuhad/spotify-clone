@@ -17,8 +17,8 @@ const Links = ({ link, icon }: LinkProps) => {
     <>
       <Link
         className={cn(
-          "icon text-4xl text-primary-high transition-all duration-300 hover:text-primary-low sm:text-5xl ",
-          path === link && "font-bold  text-primary-default  ",
+          "icon 5 text-4xl  text-primary-default transition-all hover:scale-110 active:scale-75  ",
+          path === link && "text-primary-black  font-extrabold  ",
         )}
         href={link}
       >

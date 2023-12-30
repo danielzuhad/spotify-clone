@@ -23,12 +23,12 @@ const Playlist = async ({ className, accessToken }: PlaylistProps) => {
     <>
       <section
         className={cn(
-          "  flex h-full w-full flex-wrap justify-evenly gap-5 overflow-y-hidden pb-60 sm:gap-10 sm:pb-48",
+          "  flex h-full w-full flex-wrap justify-between gap-5 pb-52 sm:gap-10 sm:pb-48",
           className,
         )}
       >
         {datas.map((data: PlaylistType, i: number) => (
-          <Card key={i} name={data.name} images={data.images} />
+          <Card key={i} id={data.id} name={data.name} images={data.images} />
         ))}
       </section>
     </>

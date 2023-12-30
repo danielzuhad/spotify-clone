@@ -16,7 +16,7 @@ const Home = async () => {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center p-2">
+      <div>
         <Welcome user={session.user} />
         <Playlist accessToken={session?.user?.accessToken} />
       </div>

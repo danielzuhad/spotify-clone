@@ -8,20 +8,20 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      white: "#ffff",
-      black: "#000",
+      white: "#FCF8FF",
+      black: "#1C1B21",
       error: "#920028",
 
       primary: {
-        low: "#FFB6D3",
-        default: "#FFB0D0",
-        high: "#FFF9F9",
+        low: "#0000",
+        default: "#16134A",
+        high: "#2E2D4A",
       },
 
       secondary: {
-        low: "#E5C1CE",
-        default: "#E1BDC9",
-        high: "#FFF9F9",
+        low: "#001F2A",
+        default: "#126682",
+        high: "#87B1C6",
       },
     },
   },
