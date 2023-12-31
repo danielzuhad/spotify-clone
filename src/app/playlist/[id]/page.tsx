@@ -1,9 +1,26 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import React from "react";
 
-const page = async ({ params }: { params: { id: number } }) => {
-  const session = await getServerSession(authOptions);
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { axiosInstance } from "@/lib/spotify-api";
+import { SessionType } from "@/type";
+
+type Props = {
+  params: {
+    id: number;
+  };
+};
+
+const page = async ({ params }: Props) => {
+  const session: SessionType | null = await getServerSession(authOptions);
+
+  const response = await axiosInstance.get(`/playlists/${params.id}`, {
+    headers: {
+      Authorization: `Bearer ${session?.user.accessToken}`,
+    },
+  });
+
+  console.log("response =>", response);
 
   return (
     <>

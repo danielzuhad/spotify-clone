@@ -23,7 +23,7 @@ const Playlist = async ({ className, accessToken }: PlaylistProps) => {
     <>
       <section
         className={cn(
-          "  flex h-full w-full flex-wrap justify-between gap-5 pb-52 sm:gap-10 sm:pb-48",
+          "  flex h-full w-full flex-wrap justify-between pb-52 sm:pb-48 sm:pt-10 xl:gap-5",
           className,
         )}
       >

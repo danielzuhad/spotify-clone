@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { getServerSession } from "next-auth";
+
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import SessionProviders from "@/providers/SessionProviders";
 import MusicPlayed from "@/components/MusicPlayed";
-import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Layout from "@/components/Layout/Layout";
 

@@ -6,7 +6,7 @@ const layoutVariants = cva("h-[97vh] relative flex", {
   variants: {
     variant: {
       root: "container   overflow-hidden rounded-xl  shadow-md shadow-black/50 ",
-      page: "w-full max-h-screen overflow-y-auto px-5",
+      page: "w-full max-h-screen overflow-y-auto px-5 xl:px-[40px] 2xl:px-[55px]",
     },
   },
 });
