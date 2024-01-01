@@ -1,6 +1,6 @@
 "use client";
 
-import cn from "@/utils/cn";
+import cn from "@/lib/cn";
 import { signIn, signOut } from "next-auth/react";
 import React from "react";
 

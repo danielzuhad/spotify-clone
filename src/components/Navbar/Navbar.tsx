@@ -4,7 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import React from "react";
 
-import cn from "@/utils/cn";
+import cn from "@/lib/cn";
 import Links from "./Links";
 import AuthButton from "../AuthButton";
 

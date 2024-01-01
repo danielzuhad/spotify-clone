@@ -1,6 +1,6 @@
 import React from "react";
 
-import cn from "@/utils/cn";
+import cn from "@/lib/cn";
 import { PlaylistType } from "@/type";
 import Card from "./Card";
 import { axiosInstance } from "@/lib/spotify-api";
@@ -10,7 +10,7 @@ interface PlaylistProps {
   accessToken?: string;
 }
 
-const Playlist = async ({ className, accessToken }: PlaylistProps) => {
+const AlbumList = async ({ className, accessToken }: PlaylistProps) => {
   const response = await axiosInstance.get("/playlists", {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -35,4 +35,4 @@ const Playlist = async ({ className, accessToken }: PlaylistProps) => {
   );
 };
 
-export default Playlist;
+export default AlbumList;

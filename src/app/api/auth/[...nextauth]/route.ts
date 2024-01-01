@@ -40,8 +40,11 @@ const LOGIN_URL =
 const refreshAccessToken = async ({ token }: { token: JWT }) => {
   try {
     const params = new URLSearchParams();
+
     params.append("grant_type", "refresh_token");
+
     params.append("refresh_token", token.refreshToken as string);
+
     const response = await fetch(`${SPOTIFY_ACCOUNT}/api/token`, {
       method: "POST",
       headers: {
@@ -53,15 +56,17 @@ const refreshAccessToken = async ({ token }: { token: JWT }) => {
               process.env.SPOTIFY_CLIENT_SECRET,
           ).toString("base64"),
       },
+
       body: params,
     });
+
     const data = await response.json();
 
     return {
       ...token,
       accessToken: data.access_token,
       refreshToken: data.refresh_token ?? token.refreshToken,
-      accessTokenExpires: Date.now() + data.expires_in * 10000,
+      accessTokenExpires: Date.now() + data.expires_in * 1000,
     };
   } catch (error) {
     console.error("Error refreshing access token:", console.error(error));
@@ -93,23 +98,22 @@ export const authOptions: NextAuthOptions = {
       token: JWT;
       account: Account | null;
     }): Promise<JWT> {
-      // sign in
+      // Persist the OAuth access_token to the token right after signin
       if (account) {
-        return {
-          ...token,
-          accessToken: account.access_token,
-          refreshToken: account.refresh_token,
-          accessTokenExpires: account.expires_at,
-        };
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+        token.accessTokenExpires = account.expires_at;
+        return token;
       }
 
       // Check if token and accessTokenExpires are defined and valid
+      // access token has not expired
+      console.log(token);
+
       if (
-        token.accessTokenExpires !== undefined &&
-        typeof token.accessTokenExpires === "number" &&
-        Date.now() < token.accessTokenExpires
+        token.accessTokenExpires &&
+        Date.now() < Number(token.accessTokenExpires) * 1000
       ) {
-        console.log("there is token");
         return token;
       }
 
@@ -131,7 +135,7 @@ export const authOptions: NextAuthOptions = {
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
         username: token.username,
-      } as any;
+      };
 
       return { ...session, user };
     },
@@ -141,12 +145,3 @@ export const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-
-// jwt alternative
-// token.accessToken = account.access_token;
-// token.refreshToken = account.refresh_token;
-// token.username = account.providerAccountId;
-// // Set Expire Token
-// token.accessTokenExpires = account?.expires_at
-//   ? account.expires_at * 1000
-//   : 0;

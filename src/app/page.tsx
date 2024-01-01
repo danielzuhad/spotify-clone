@@ -3,9 +3,9 @@ import React from "react";
 import { redirect } from "next/navigation";
 
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import Playlist from "@/components/Home/Playlist";
 import Welcome from "@/components/Home/Welcome";
 import { SessionType } from "@/type";
+import AlbumList from "@/components/Home/AlbumList";
 
 const Home = async () => {
   const session: SessionType | null = await getServerSession(authOptions);
@@ -18,7 +18,7 @@ const Home = async () => {
     <>
       <div>
         <Welcome user={session.user} />
-        <Playlist accessToken={session?.user?.accessToken} />
+        <AlbumList accessToken={session?.user?.accessToken} />
       </div>
     </>
   );

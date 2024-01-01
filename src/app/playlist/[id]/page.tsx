@@ -12,15 +12,15 @@ type Props = {
 };
 
 const page = async ({ params }: Props) => {
-  const session: SessionType | null = await getServerSession(authOptions);
+  // const session: SessionType | null = await getServerSession(authOptions);
 
-  const response = await axiosInstance.get(`/playlists/${params.id}`, {
-    headers: {
-      Authorization: `Bearer ${session?.user.accessToken}`,
-    },
-  });
+  // const response = await axiosInstance.get(`/playlists/${params.id}`, {
+  //   headers: {
+  //     Authorization: `Bearer ${session?.user.accessToken}`,
+  //   },
+  // });
 
-  console.log("response =>", response);
+  // console.log("response =>", response);
 
   return (
     <>
