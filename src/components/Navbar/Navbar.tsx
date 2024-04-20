@@ -1,3 +1,5 @@
+"use client";
+
 import { VscAccount } from "react-icons/vsc";
 import { GoHome } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
@@ -5,17 +7,19 @@ import { CiLogout } from "react-icons/ci";
 import React from "react";
 
 import cn from "@/lib/cn";
+import { LinkType } from "./types";
 import Links from "./Links";
-import AuthButton from "../AuthButton";
+import { signOut } from "next-auth/react";
 
 interface NavbarProps extends React.ComponentProps<"div"> {
   className?: string;
 }
 
-const links = [
-  { link: "/profile", icon: <VscAccount /> },
-  { link: "/", icon: <GoHome /> },
-  { link: "/search", icon: <IoIosSearch /> },
+const links: LinkType[] = [
+  { link: "/", icon: <GoHome size={30} stroke="1" />, label: "Home" },
+  { link: "/profile", icon: <VscAccount size={28} />, label: "Profile" },
+  { link: "/search", icon: <IoIosSearch size={30} />, label: "Search" },
+  { link: "/login", icon: <CiLogout size={30} />, label: "Logout" },
 ];
 
 const Navbar = ({ className, ...props }: NavbarProps) => {
@@ -23,20 +27,17 @@ const Navbar = ({ className, ...props }: NavbarProps) => {
     <>
       <div
         className={cn(
-          "fixed bottom-0 z-10 flex w-full items-center justify-evenly bg-white/50 backdrop-blur-xl sm:relative sm:h-full sm:w-max sm:flex-col sm:items-center sm:justify-start sm:gap-y-[55px]  sm:bg-none sm:px-[40px] sm:pt-[110px] sm:backdrop-blur-0 md:px-[50px]",
+          "fixed bottom-0 z-10 flex w-full  justify-evenly bg-white/40 backdrop-blur-sm sm:relative sm:h-full  sm:w-[200px] sm:flex-col sm:items-center sm:justify-start sm:gap-y-[30px]  sm:bg-none sm:pt-5 sm:backdrop-blur-0  ",
           className,
         )}
       >
-        {links.map((link, index) => (
-          <Links key={index} icon={link.icon} link={link.link} />
-        ))}
-
-        <AuthButton
-          auth="signOut"
-          className="icon bg- px-0 text-4xl hover:scale-110  "
-        >
-          <CiLogout />
-        </AuthButton>
+        {links.map((link, index) =>
+          link.label === "Logout" ? (
+            <Links onClick={signOut} key={index} link={link} />
+          ) : (
+            <Links key={index} link={link} />
+          ),
+        )}
       </div>
     </>
   );

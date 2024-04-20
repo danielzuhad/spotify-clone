@@ -1,9 +1,8 @@
 import Link from "next/link";
-import React from "react";
 
-import { PlaylistType } from "@/type";
+import { AlbumType } from "@/type";
 
-const Card = ({ name, images, id }: PlaylistType) => {
+const Card = ({ name, images, id }: AlbumType) => {
   const image = images?.[0]?.url;
 
   return (

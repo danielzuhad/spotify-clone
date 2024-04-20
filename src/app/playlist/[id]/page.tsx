@@ -1,9 +1,11 @@
 import { getServerSession } from "next-auth";
-import React from "react";
-
+import "@/app/globals.css";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { axiosInstance } from "@/lib/spotify-api";
 import { SessionType } from "@/type";
+import HeaderPlaylist from "@/components/Playlist/HeaderPlaylist";
+import ContentPlaylist from "../components/ContentPlaylist";
+import { TrackItemType } from "../types";
 
 type Props = {
   params: {
@@ -12,20 +14,22 @@ type Props = {
 };
 
 const page = async ({ params }: Props) => {
-  // const session: SessionType | null = await getServerSession(authOptions);
+  const session: SessionType | null = await getServerSession(authOptions);
 
-  // const response = await axiosInstance.get(`/playlists/${params.id}`, {
-  //   headers: {
-  //     Authorization: `Bearer ${session?.user.accessToken}`,
-  //   },
-  // });
+  const response = await axiosInstance.get(`/playlists/${params.id}`, {
+    headers: {
+      Authorization: `Bearer ${session?.user?.accessToken}`,
+    },
+  });
 
-  // console.log("response =>", response);
+  const dataTracks: TrackItemType[] = response.data?.tracks?.items;
 
   return (
-    <>
-      <div>{params.id}</div>
-    </>
+    <div className="relative w-full">
+      <HeaderPlaylist playlist={response.data} />
+
+      <ContentPlaylist track={dataTracks} />
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     colors: {
       white: "#FCF8FF",
-      black: "#1C1B21",
+      black: "#2A313C",
       error: "#920028",
 
       primary: {

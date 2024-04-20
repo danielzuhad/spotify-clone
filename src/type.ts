@@ -1,4 +1,4 @@
-export type PlaylistType = {
+export type AlbumType = {
   id?: "5wkeNmxMux2oqkfg1McKg1";
   name?: "despair";
   owner?: object[];

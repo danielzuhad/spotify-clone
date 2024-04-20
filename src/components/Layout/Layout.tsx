@@ -1,12 +1,12 @@
 import cn from "@/lib/cn";
 import { VariantProps, cva } from "class-variance-authority";
-import React, { ComponentProps } from "react";
+import React from "react";
 
-const layoutVariants = cva("h-[97vh] relative flex", {
+const layoutVariants = cva(" relative flex", {
   variants: {
     variant: {
-      root: "container   overflow-hidden rounded-xl  shadow-md shadow-black/50 ",
-      page: "w-full max-h-screen overflow-y-auto px-5 xl:px-[40px] 2xl:px-[55px]",
+      root: "container overflow-hidden ",
+      page: "w-full pt-5 h-[95vh] flex-col overflow-y-auto px-5 xl:px-[40px] 2xl:px-[55px]",
     },
   },
 });

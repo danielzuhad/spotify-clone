@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import MusicPlayed from "@/components/MusicPlayed";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Layout from "@/components/Layout/Layout";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"], preload: false });
 
@@ -25,9 +27,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Layout variant="root">
+        <Layout variant="root" className="relative">
           {session && <Navbar />}
-          <Layout variant="page">{children}</Layout>
+          <Suspense fallback={<Loading />}>
+            <Layout variant="page">{children}</Layout>
+          </Suspense>
           {session && <MusicPlayed />}
         </Layout>
       </body>

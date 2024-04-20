@@ -8,9 +8,31 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fcf8ff;
+  background-image: linear-gradient(
+    to left bottom,
+    #ffe9f0,
+    #fdedf5,
+    #fcf2fa,
+    #fbf6fc,
+    #fcfafe,
+    #fbf9fe,
+    #f9f8ff,
+    #f7f7ff,
+    #f0f1ff,
+    #e8ebff,
+    #dfe5ff,
+    #d5e0ff
+  );
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.17);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(202, 202, 202, 0.445);
 }

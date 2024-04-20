@@ -1,5 +1,4 @@
-import axios, { AxiosResponse } from "axios";
-import NextAuth, { Account, NextAuthOptions, Session } from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import SpotifyProvider from "next-auth/providers/spotify";
 
@@ -66,11 +65,13 @@ const refreshAccessToken = async ({ token }: { token: JWT }) => {
       ...token,
       accessToken: data.access_token,
       refreshToken: data.refresh_token ?? token.refreshToken,
-      accessTokenExpires: Date.now() + data.expires_in * 1000,
+      accessTokenExpires: Date.now() + data.expires_in * 100000,
     };
   } catch (error) {
-    console.error("Error refreshing access token:", console.error(error));
-    throw error;
+    console.error("Error refreshing access token:", error);
+
+    // Redirect or signal to redirect to login if refresh fails
+    throw new Error("RefreshTokenFailed");
   }
 };
 // Spotify End
@@ -91,13 +92,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXT_PUBLIC_JWT_SECRET,
 
   callbacks: {
-    async jwt({
-      token,
-      account,
-    }: {
-      token: JWT;
-      account: Account | null;
-    }): Promise<JWT> {
+    async jwt({ token, account }: { token: any; account: any }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
         token.accessToken = account.access_token;
@@ -108,19 +103,21 @@ export const authOptions: NextAuthOptions = {
 
       // Check if token and accessTokenExpires are defined and valid
       // access token has not expired
-      console.log(token);
 
       if (
         token.accessTokenExpires &&
-        Date.now() < Number(token.accessTokenExpires) * 1000
+        Date.now() >= token.accessTokenExpires * 1000
       ) {
+        try {
+          const refreshedToken = await refreshAccessToken({ token });
+          return refreshedToken;
+        } catch (error) {
+          console.log("Redirecting to login because token refresh failed");
+          throw new Error("RedirectToLogin");
+        }
+      } else {
         return token;
       }
-
-      // if token expires, it's gonna refresh it
-      console.log("token expired, regenerating...");
-      const refreshedToken = await refreshAccessToken({ token });
-      return refreshedToken as JWT;
     },
 
     async session({

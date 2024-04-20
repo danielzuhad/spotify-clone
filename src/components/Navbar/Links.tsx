@@ -1,28 +1,36 @@
 "use client";
 
-import cn from "@/lib/cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 
-interface LinkProps {
-  icon: React.ReactNode;
-  link: string;
-}
+import cn from "@/lib/cn";
+import { LinkType } from "./types";
 
-const Links = ({ link, icon }: LinkProps) => {
+type LinkProps = {
+  link: LinkType;
+  className?: string;
+  onClick?: () => void;
+};
+
+const Links = ({ link, className, onClick }: LinkProps) => {
   const path = usePathname();
 
   return (
     <>
       <Link
+        onClick={onClick}
         className={cn(
-          "icon 5 text-4xl  text-primary-default transition-all hover:scale-110 active:scale-75  ",
-          path === link && "text-primary-black  font-extrabold  ",
+          "w-full rounded-lg  px-8 py-2 text-xl text-primary-default backdrop-blur-sm transition-all hover:bg-black/5 sm:flex sm:justify-center",
+          path === link.link && "bg-black/5 text-black ",
+          className,
         )}
-        href={link}
+        href={link.link || ""}
       >
-        {icon}
+        <div className="flex w-full items-center justify-between gap-2">
+          <p className="max-md:text-base max-sm:hidden">{link.label}</p>
+
+          {link.icon}
+        </div>
       </Link>
     </>
   );
