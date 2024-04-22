@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { PlaylistType } from "@/app/playlist/types";
 import cn from "@/lib/cn";
+import { PlaylistType } from "@/type";
 
 type Props = {
   className?: string;

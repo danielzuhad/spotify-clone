@@ -1,9 +1,9 @@
 "use client";
 
-import { TrackItemType } from "../types";
 import TrackItemRow from "./TrackItemRow";
 import { albumName, artistName, time, title } from "../utils";
 import { useState } from "react";
+import { TrackItemType } from "@/type";
 
 type TableBodyPlaylistProps = {
   track: TrackItemType[];

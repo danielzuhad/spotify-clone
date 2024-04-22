@@ -2,10 +2,9 @@ import { getServerSession } from "next-auth";
 import "@/app/globals.css";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { axiosInstance } from "@/lib/spotify-api";
-import { SessionType } from "@/type";
+import { SessionType, TrackItemType } from "@/type";
 import HeaderPlaylist from "@/components/Playlist/HeaderPlaylist";
 import ContentPlaylist from "../components/ContentPlaylist";
-import { TrackItemType } from "../types";
 
 type Props = {
   params: {

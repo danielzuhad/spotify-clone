@@ -1,6 +1,6 @@
 "use client";
 
-import { TrackItemType } from "../types";
+import { TrackItemType } from "@/type";
 import TableBodyPlaylist from "./TableBodyPlaylist";
 import TableHeadPlaylist from "./TableHeadPlaylist";
 

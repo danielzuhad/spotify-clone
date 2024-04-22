@@ -1,4 +1,4 @@
-import { ArtistType } from "../types";
+import { ArtistType } from "@/type";
 import TableDataTrack from "./TableDataTrack";
 import TableRowPlaylist from "./TableRowPlaylist";
 import { IoTimeOutline } from "react-icons/io5";

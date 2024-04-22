@@ -112,3 +112,14 @@ export type PlaylistType = {
 export type RestrictionsType = {
   reason: string;
 };
+
+export type SessionType = {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+    accessToken: string;
+    refreshToken: string;
+    username?: string | undefined;
+  };
+};

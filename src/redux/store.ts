@@ -1,23 +1,12 @@
-import {
-  Reducer,
-  AnyAction,
-  combineReducers,
-  configureStore,
-  ThunkDispatch,
-} from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { configureStore } from "@reduxjs/toolkit";
+import playerReducer from "./playerSlice";
 
-interface RootState {}
-
-const rootReducer: Reducer<RootState, AnyAction> = combineReducers({});
-
-const persistConfig = { key: "root", storage, version: 1 };
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = configureStore({
-  reducer: persistedReducer,
+const store = configureStore({
+  reducer: {
+    player: playerReducer,
+  },
 });
 
-export type AppDispatch = typeof store.getState;
-export type AppThunkDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export default store;
