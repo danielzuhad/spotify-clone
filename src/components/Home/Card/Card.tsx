@@ -1,15 +1,21 @@
 import Link from "next/link";
 
-import { AlbumType } from "@/type";
+type CardProps = {
+  name: string;
+  images: {
+    url: string;
+  }[];
+  id: string;
+};
 
-const Card = ({ name, images, id }: AlbumType) => {
+const Card = ({ name, images, id }: CardProps) => {
   const image = images?.[0]?.url;
 
   return (
     <>
       <Link
         href={`playlist/${id}`}
-        className="mb-7 flex w-[40vw] flex-col items-center rounded-xl sm:w-52 md:w-64 lg:w-60 xl:w-56"
+        className="mb-7 flex w-[40vw] flex-col items-center rounded-xl sm:w-28 md:w-36  lg:w-52  xl:w-[210px] 2xl:w-60  "
       >
         <img
           src={image}

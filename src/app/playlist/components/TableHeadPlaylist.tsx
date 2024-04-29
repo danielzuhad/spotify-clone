@@ -10,7 +10,7 @@ const TableHeadPlaylist = ({}: TableHeadPlaylistProps) => {
   return (
     <>
       <div>
-        <TableRowPlaylist className="px-2">
+        <TableRowPlaylist onClick={() => {}} className="px-2">
           {/* <th className="col-span-1">Title</th>
         <th className="col-span-4">Title</th>
         <th className="col-span-3">Title</th>
@@ -21,7 +21,7 @@ const TableHeadPlaylist = ({}: TableHeadPlaylistProps) => {
             <p
               key={index}
               className={cn(
-                `col-span-${colSpans[index]} font-normal text-[#b1b1b1] max-sm:text-xs`,
+                `col-span-${colSpans[index]} font-normal text-[#b1b1b1] max-md:text-xs`,
                 head !== "#" && "text-left",
                 head === "#" && "w-10",
               )}

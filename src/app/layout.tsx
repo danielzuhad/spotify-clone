@@ -4,11 +4,11 @@ import { getServerSession } from "next-auth";
 
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import MusicPlayed from "@/components/MusicPlayed";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import Layout from "@/components/Layout/Layout";
-import { Suspense } from "react";
-import Loading from "./loading";
+import ProviderWrapper from "../provider/ProviderWrapper";
+import { authOptions } from "./api/auth/[...nextauth]/options";
+import { SessionType } from "@/type";
+import MusicBox from "@/components/MusicBox/MusicBox";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"], preload: false });
 
@@ -22,18 +22,25 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const session: SessionType | null = await getServerSession(authOptions);
 
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Layout variant="root" className="relative">
-          {session && <Navbar />}
-          <Suspense fallback={<Loading />}>
-            <Layout variant="page">{children}</Layout>
-          </Suspense>
-          {session && <MusicPlayed />}
-        </Layout>
+        <ProviderWrapper>
+          <Layout variant="root" className="relative gap-x-2">
+            {session && (
+              <div className="sm:flex sm:w-[350px] sm:flex-col sm:gap-2 md:w-[400px]">
+                <Navbar />
+                <MusicBox session={session} />
+              </div>
+            )}
+            <Layout variant="page" className="relative ">
+              {children}
+            </Layout>
+            {/* {session && <MusicPlayed />} */}
+          </Layout>
+        </ProviderWrapper>
       </body>
     </html>
   );

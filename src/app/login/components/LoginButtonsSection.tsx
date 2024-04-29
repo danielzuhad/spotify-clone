@@ -1,5 +1,5 @@
 "use client";
-import AuthButton from "@/components/AuthButton";
+import AuthButton from "@/components/Navbar/AuthButton";
 import { signIn } from "next-auth/react";
 import React from "react";
 import { PiSpotifyLogoLight } from "react-icons/pi";

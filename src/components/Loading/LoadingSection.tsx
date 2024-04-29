@@ -5,7 +5,7 @@ const LoadingSection = () => {
     <>
       <div className="flex h-full w-full items-center justify-center">
         <div className="animate-spin">
-          <AiOutlineLoading3Quarters size={100} />
+          <AiOutlineLoading3Quarters color="#C7C8CC" size={100} />
         </div>
       </div>
     </>

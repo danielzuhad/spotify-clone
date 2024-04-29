@@ -3,12 +3,20 @@ import cn from "@/lib/cn";
 type TableRowPlaylistProps = {
   children?: React.ReactNode;
   className?: string;
+  onClick: () => void;
 };
 
-const TableRowPlaylist = ({ children, className }: TableRowPlaylistProps) => {
+const TableRowPlaylist = ({
+  children,
+  className,
+  onClick,
+}: TableRowPlaylistProps) => {
   return (
     <>
-      <div className={cn("grid w-full grid-cols-12", className)}>
+      <div
+        onClick={onClick}
+        className={cn("grid w-full grid-cols-12", className)}
+      >
         {children}
       </div>
     </>

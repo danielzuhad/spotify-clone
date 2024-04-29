@@ -9,7 +9,7 @@ type TableDataTrackProps = {
 const TableDataTrack = ({ children, className }: TableDataTrackProps) => {
   return (
     <>
-      <div className={cn("col-span-1 max-sm:text-xs", className)}>
+      <div className={cn("col-span-1 max-md:text-xs", className)}>
         {children}
       </div>
     </>

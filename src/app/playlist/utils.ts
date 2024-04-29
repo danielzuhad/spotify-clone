@@ -1,4 +1,4 @@
-import { TrackItemType } from "./types";
+import { TrackItemType } from "@/type";
 
 export const title = (item: TrackItemType) => {
   return String(item.track.name);

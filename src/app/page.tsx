@@ -1,23 +1,24 @@
 import { getServerSession } from "next-auth/next";
-
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import Welcome from "@/components/Home/Welcome";
+import Welcome from "@/components/Home/Header/Welcome";
 import { SessionType } from "@/type";
-import AlbumList from "@/components/Home/AlbumList";
+import LoadingSection from "@/components/Loading/LoadingSection";
+import TemplateWrapper from "../provider/TemplateWrapper";
+import Album from "@/components/Home/Album/Album";
+import { authOptions } from "./api/auth/[...nextauth]/options";
 
 const Home = async () => {
   const session: SessionType | null = await getServerSession(authOptions);
 
-  // if (!session) {
-  //   redirect("/login");
-  // }
-
   return (
     <>
-      <div>
+      <TemplateWrapper className=" w-full">
         {session && <Welcome user={session.user} />}
-        <AlbumList accessToken={session?.user?.accessToken} />
-      </div>
+        {session ? (
+          <Album accessToken={session?.user?.accessToken} />
+        ) : (
+          <LoadingSection />
+        )}
+      </TemplateWrapper>
     </>
   );
 };

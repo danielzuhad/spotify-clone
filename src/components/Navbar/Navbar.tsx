@@ -16,10 +16,10 @@ interface NavbarProps extends React.ComponentProps<"div"> {
 }
 
 const links: LinkType[] = [
-  { link: "/", icon: <GoHome size={30} stroke="1" />, label: "Home" },
-  { link: "/profile", icon: <VscAccount size={28} />, label: "Profile" },
-  { link: "/search", icon: <IoIosSearch size={30} />, label: "Search" },
-  { link: "/login", icon: <CiLogout size={30} />, label: "Logout" },
+  { link: "/", icon: <GoHome size={25} stroke="1" />, label: "Home" },
+  { link: "/profile", icon: <VscAccount size={23} />, label: "Profile" },
+  { link: "/search", icon: <IoIosSearch size={25} />, label: "Search" },
+  { link: "/login", icon: <CiLogout size={25} />, label: "Logout" },
 ];
 
 const Navbar = ({ className, ...props }: NavbarProps) => {
@@ -27,7 +27,7 @@ const Navbar = ({ className, ...props }: NavbarProps) => {
     <>
       <div
         className={cn(
-          "fixed bottom-0 z-10 flex w-full  justify-evenly bg-white/40 backdrop-blur-sm sm:relative sm:h-full  sm:w-[200px] sm:flex-col sm:items-center sm:justify-start sm:gap-y-[30px]  sm:bg-none sm:pt-5 sm:backdrop-blur-0  ",
+          "glass fixed bottom-0 left-[-1px] z-10 flex w-full justify-evenly rounded-md    sm:relative sm:h-max sm:flex-col sm:items-center  sm:justify-start sm:gap-y-[15px] sm:rounded-lg sm:bg-none sm:p-3 sm:py-5  sm:shadow-sm md:py-8 ",
           className,
         )}
       >

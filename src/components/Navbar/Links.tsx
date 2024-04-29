@@ -20,14 +20,14 @@ const Links = ({ link, className, onClick }: LinkProps) => {
       <Link
         onClick={onClick}
         className={cn(
-          "w-full rounded-lg  px-8 py-2 text-xl text-primary-default backdrop-blur-sm transition-all hover:bg-black/5 sm:flex sm:justify-center",
+          "sm:px- w-full  py-2 text-xl text-primary-default backdrop-blur-sm transition-all hover:bg-[#4141410b] sm:flex sm:justify-center sm:rounded-lg sm:px-12",
           path === link.link && "bg-black/5 text-black ",
           className,
         )}
         href={link.link || ""}
       >
-        <div className="flex w-full items-center justify-between gap-2">
-          <p className="max-md:text-base max-sm:hidden">{link.label}</p>
+        <div className="flex w-full items-center justify-center gap-2 sm:justify-between">
+          <p className="max-sm:hidden sm:text-base md:text-lg">{link.label}</p>
 
           {link.icon}
         </div>

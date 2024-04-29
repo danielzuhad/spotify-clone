@@ -3,12 +3,12 @@ import { TrackType } from "@/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-interface PlayerState {
+export type PlayerStateType = {
   currentTrack: TrackType | null;
   isPlaying: boolean;
-}
+};
 
-const initialState: PlayerState = {
+const initialState: PlayerStateType = {
   currentTrack: null,
   isPlaying: false,
 };
@@ -19,7 +19,7 @@ const playerSlice = createSlice({
   reducers: {
     setTrack: (state, action: PayloadAction<TrackType>) => {
       state.currentTrack = action.payload;
-      state.isPlaying = true; // Mungkin ingin memulai langsung pemutaran
+      state.isPlaying = true;
     },
     clearTrack: (state) => {
       state.currentTrack = null;
