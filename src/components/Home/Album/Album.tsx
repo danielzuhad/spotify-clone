@@ -1,5 +1,5 @@
 import { AlbumType } from "@/type";
-import { axiosInstance } from "@/lib/spotify-api";
+import useHome from "../hooks/useHome";
 import AlbumList from "./AlbumList";
 
 interface Props {
@@ -8,13 +8,11 @@ interface Props {
 }
 
 const Album = async ({ className, accessToken }: Props) => {
-  const response = await axiosInstance.get("/me/playlists", {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const { getAlbum } = useHome();
 
-  const datas: AlbumType[] = response.data.items;
+  const albumReponse = await getAlbum({ accessToken });
+
+  const datas: AlbumType[] = albumReponse?.data.items;
 
   return (
     <>

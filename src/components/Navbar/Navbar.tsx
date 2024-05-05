@@ -1,6 +1,6 @@
 "use client";
 
-import { VscAccount } from "react-icons/vsc";
+import { MdOutlineFeedback } from "react-icons/md";
 import { GoHome } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
@@ -17,7 +17,11 @@ interface NavbarProps extends React.ComponentProps<"div"> {
 
 const links: LinkType[] = [
   { link: "/", icon: <GoHome size={25} stroke="1" />, label: "Home" },
-  { link: "/profile", icon: <VscAccount size={23} />, label: "Profile" },
+  {
+    link: "/information",
+    icon: <MdOutlineFeedback size={23} />,
+    label: "Information",
+  },
   { link: "/search", icon: <IoIosSearch size={25} />, label: "Search" },
   { link: "/login", icon: <CiLogout size={25} />, label: "Logout" },
 ];

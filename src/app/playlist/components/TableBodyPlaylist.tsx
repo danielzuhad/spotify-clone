@@ -3,7 +3,7 @@ import TrackItemRow from "./TrackItemRow";
 import { TrackItemType } from "@/type";
 import useTracks from "../hooks/useTracks";
 import { useDispatch } from "react-redux";
-import { setTrack } from "@/redux/playerSlice";
+import { PlayerPayloadType, setTrack } from "@/redux/playerSlice";
 
 type TableBodyPlaylistProps = {
   track: TrackItemType[];
@@ -15,12 +15,21 @@ const TableBodyPlaylist = ({ track }: TableBodyPlaylistProps) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="mt-2 ">
+    <div className="mt-2 max-sm:pb-32">
       <div>
-        {track.slice(0, visibleCount).map((item, index) => (
+        {track.map((item, index) => (
           <TrackItemRow
             onClick={() => {
-              dispatch(setTrack(item.track));
+              const trackPayload: PlayerPayloadType = {
+                currentTrack: {
+                  artist: item.track.artists.map((artist) => artist.name),
+                  image: item.track.album.images[0].url,
+                  musicName: item.track.name,
+                  uri: item.track.uri,
+                },
+              };
+
+              dispatch(setTrack(trackPayload));
             }}
             key={index}
             number={index + 1}
@@ -29,7 +38,7 @@ const TableBodyPlaylist = ({ track }: TableBodyPlaylistProps) => {
         ))}
       </div>
 
-      {track.length < 10 ? null : (
+      {/* {track.length < 10 ? null : (
         <div className="flex w-full pb-5 pt-7 text-[#b1b1b1]">
           <button
             onClick={() =>
@@ -40,7 +49,7 @@ const TableBodyPlaylist = ({ track }: TableBodyPlaylistProps) => {
             {visibleCount < track.length ? "Show More" : "Show Less"}
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

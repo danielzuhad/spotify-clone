@@ -1,4 +1,4 @@
-import TemplateWrapper from "@/provider/TemplateWrapper";
+import TemplateWrapper from "@/components/Layout/TemplateWrapper";
 
 type TemplateProps = {
   children: React.ReactNode;

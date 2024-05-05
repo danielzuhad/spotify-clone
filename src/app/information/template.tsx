@@ -1,6 +1,6 @@
 "use client";
 
-import TemplateWrapper from "../../provider/TemplateWrapper";
+import TemplateWrapper from "../../components/Layout/TemplateWrapper";
 
 const Template = ({ children }: { children: React.ReactNode }) => {
   return (

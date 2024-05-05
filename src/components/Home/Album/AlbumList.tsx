@@ -1,6 +1,7 @@
 import cn from "@/lib/cn";
 import { AlbumType } from "@/type";
 import Card from "../Card/Card";
+import LoadingSection from "@/components/Loading/LoadingSection";
 
 interface Props {
   className?: string;
@@ -8,6 +9,14 @@ interface Props {
 }
 
 const AlbumList = async ({ className, datas }: Props) => {
+  if (!datas) {
+    return (
+      <>
+        <LoadingSection />
+      </>
+    );
+  }
+
   return (
     <>
       <div

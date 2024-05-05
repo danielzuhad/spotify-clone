@@ -1,5 +1,6 @@
 "use client";
 import store from "@/redux/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import { Provider } from "react-redux";
 
@@ -8,9 +9,15 @@ type ProviderWrapperProps = {
 };
 
 const ProviderWrapper = ({ children }: ProviderWrapperProps) => {
+  const queryClient = new QueryClient();
+
   return (
     <>
-      <Provider store={store}>{children}</Provider>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </Provider>
     </>
   );
 };

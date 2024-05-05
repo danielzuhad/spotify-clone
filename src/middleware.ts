@@ -8,8 +8,8 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({
     req: request,
     secret: secret,
-    cookieName: "next-auth.session-token",
   });
+
   const pathnameEndsWith = (searchString: string) => {
     return request.nextUrl.pathname.endsWith(searchString);
   };

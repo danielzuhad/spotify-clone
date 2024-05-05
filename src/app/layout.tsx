@@ -7,8 +7,11 @@ import Navbar from "@/components/Navbar/Navbar";
 import Layout from "@/components/Layout/Layout";
 import ProviderWrapper from "../provider/ProviderWrapper";
 import { authOptions } from "./api/auth/[...nextauth]/options";
-import { SessionType } from "@/type";
+import { DeviceType, SessionType } from "@/type";
 import MusicBox from "@/components/MusicBox/MusicBox";
+import { getDeviceId } from "./utils";
+import MobileMusicBox from "@/components/MusicBox/Mobile/MobileMusicBox";
+import Title from "@/components/Title/Title";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"], preload: false });
 
@@ -24,21 +27,28 @@ export default async function RootLayout({
 }) {
   const session: SessionType | null = await getServerSession(authOptions);
 
+  const deviceIdResponse = await getDeviceId({
+    accessToken: String(session?.user?.accessToken),
+  });
+
+  const deviceId: DeviceType = deviceIdResponse ? deviceIdResponse.data : null;
+
   return (
     <html lang="en">
       <body className={poppins.className}>
         <ProviderWrapper>
           <Layout variant="root" className="relative gap-x-2">
-            {session && (
+            {session ? (
               <div className="sm:flex sm:w-[350px] sm:flex-col sm:gap-2 md:w-[400px]">
+                <Title />
                 <Navbar />
-                <MusicBox session={session} />
+                <MusicBox deviceId={deviceId} session={session} />
               </div>
-            )}
+            ) : null}
             <Layout variant="page" className="relative ">
               {children}
             </Layout>
-            {/* {session && <MusicPlayed />} */}
+            {session && <MobileMusicBox session={session} />}
           </Layout>
         </ProviderWrapper>
       </body>

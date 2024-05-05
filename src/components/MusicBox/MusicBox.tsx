@@ -1,7 +1,7 @@
 "use client";
 import cn from "@/lib/cn";
 import { RootState } from "@/redux/store";
-import { SessionType } from "@/type";
+import { DeviceType, SessionType } from "@/type";
 import { ComponentProps } from "react";
 import { useSelector } from "react-redux";
 import MusicContent from "./MusicContent";
@@ -9,24 +9,27 @@ import MusicContent from "./MusicContent";
 type MusicBoxProps = ComponentProps<"div"> & {
   className?: string;
   session: SessionType;
+  deviceId: DeviceType;
 };
 
-const MusicBox = ({ className, session }: MusicBoxProps) => {
-  const currentTrack = useSelector(
-    (state: RootState) => state.player.currentTrack,
-  );
+const MusicBox = ({ className, session, deviceId }: MusicBoxProps) => {
+  const track = useSelector((state: RootState) => state.player);
 
   return (
     <>
       <div
         className={cn(
-          "glass h-[450px] w-full rounded-lg max-sm:hidden  lg:h-full",
+          "glass h-full w-full rounded-lg max-sm:hidden ",
           className,
         )}
       >
         {/* Conditional Music Box */}
-        {currentTrack && (
-          <MusicContent track={currentTrack} session={session} />
+        {track.currentTrack?.uri && (
+          <MusicContent
+            track={track}
+            session={session}
+            deviceId={deviceId.devices[0].id}
+          />
         )}
       </div>
     </>

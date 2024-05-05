@@ -7,25 +7,53 @@ import { Album } from "../types";
 type GetTrackType = {
   accessToken: string;
   uris: string;
+  deviceId: string;
+};
+
+type ResumeSongType = {
+  accessToken: string;
+  uris: string;
+  position_ms: number;
 };
 
 export const useMusicBox = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentMusic, setCurrentMusic] = useState<Album | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const playSong = async ({ accessToken, uris }: GetTrackType) => {
+  const getDeviceId = async ({ accessToken }: { accessToken: string }) => {
+    const response = await axiosInstance.get("/me/player/devices", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    return response;
+  };
+
+  const getCurrentTrack = async ({ accessToken }: { accessToken: string }) => {
+    const response = await axiosInstance.get("/me/player/currently-playing", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    console.log("getCurrent", response.data);
+    return response;
+  };
+
+  const playSong = async ({ accessToken, uris, deviceId }: GetTrackType) => {
     try {
       const response = await axiosInstance.put(
-        `/v1/me/player/play`,
-        { uris: [uris] },
+        `/me/player/play?device_id=${deviceId}`,
+        {
+          uris: [uris],
+        },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         },
       );
-      setIsPlaying(true);
       return response;
     } catch (error) {
       console.error("Error fetching track:", error);
@@ -33,14 +61,31 @@ export const useMusicBox = () => {
     }
   };
 
-  const pauseSong = async ({ accessToken }: GetTrackType) => {
+  const pauseSong = async ({ accessToken }: { accessToken: string }) => {
     try {
-      const response = await axiosInstance.put(`/v1/me/player/play`, {
+      const response = await axiosInstance.put(`/me/player/pause`, null, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      setIsPlaying(false);
+      return response;
+    } catch (error) {
+      console.error("Error fetching track:", error);
+      throw error;
+    }
+  };
+
+  const resumeSong = async ({
+    accessToken,
+    position_ms,
+    uris,
+  }: ResumeSongType) => {
+    try {
+      const response = await axiosInstance.put(`/me/player/play`, null, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       return response;
     } catch (error) {
       console.error("Error fetching track:", error);
@@ -54,8 +99,9 @@ export const useMusicBox = () => {
     setLoading,
     setCurrentMusic,
     currentMusic,
-    isPlaying,
-    setIsPlaying,
     pauseSong,
+    getCurrentTrack,
+    resumeSong,
+    getDeviceId,
   };
 };

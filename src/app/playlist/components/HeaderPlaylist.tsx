@@ -16,7 +16,7 @@ const HeaderPlaylist = ({ className, playlist }: Props) => {
         <img
           src={image}
           alt="album-picture"
-          className="aspect-square h-max w-28 rounded-xl shadow-sm shadow-black max-sm:mt-2 min-[400px]:w-32 md:w-40 md:shadow-md md:shadow-black lg:w-56 xl:w-60"
+          className="aspect-square h-max w-28 rounded-xl  border-2 border-[#dedede] max-sm:mt-2 min-[400px]:w-32 md:w-40 lg:w-56 xl:w-60"
         />
 
         <div className=" flex w-full flex-col justify-between text-sm md:text-lg">

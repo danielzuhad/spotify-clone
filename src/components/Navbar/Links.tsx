@@ -20,7 +20,7 @@ const Links = ({ link, className, onClick }: LinkProps) => {
       <Link
         onClick={onClick}
         className={cn(
-          "sm:px- w-full  py-2 text-xl text-primary-default backdrop-blur-sm transition-all hover:bg-[#4141410b] sm:flex sm:justify-center sm:rounded-lg sm:px-12",
+          "sm:px- w-full  py-2 text-xl text-black backdrop-blur-sm transition-all hover:bg-[#4141410b] sm:flex sm:justify-center sm:rounded-lg sm:px-12",
           path === link.link && "bg-black/5 text-black ",
           className,
         )}

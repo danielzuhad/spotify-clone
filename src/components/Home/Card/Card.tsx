@@ -19,7 +19,7 @@ const Card = ({ name, images, id }: CardProps) => {
       >
         <img
           src={image}
-          className=" aspect-square w-full rounded-lg object-cover shadow-md shadow-black transition-all hover:scale-105"
+          className=" k aspect-square w-full rounded-lg border-2 border-[#d4d4d4] object-cover  transition-all hover:scale-105"
         />
         <h3
           className={`mt-2 line-clamp-1 w-full text-start text-sm font-semibold text-primary-default sm:text-lg lg:text-xl ${name}`}

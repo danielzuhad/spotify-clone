@@ -1,15 +1,32 @@
-// features/player/playerSlice.ts
-import { TrackType } from "@/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
+export type PlayerPayloadType = {
+  currentTrack: {
+    uri: string;
+    image: string;
+    musicName: string;
+    artist: string[];
+  } | null;
+};
+
 export type PlayerStateType = {
-  currentTrack: TrackType | null;
+  currentTrack: {
+    uri: string;
+    image: string;
+    musicName: string;
+    artist: string[];
+  } | null;
   isPlaying: boolean;
 };
 
 const initialState: PlayerStateType = {
-  currentTrack: null,
+  currentTrack: {
+    uri: "",
+    image: "",
+    musicName: "",
+    artist: [],
+  },
   isPlaying: false,
 };
 
@@ -17,8 +34,8 @@ const playerSlice = createSlice({
   name: "player",
   initialState,
   reducers: {
-    setTrack: (state, action: PayloadAction<TrackType>) => {
-      state.currentTrack = action.payload;
+    setTrack: (state, action: PayloadAction<PlayerPayloadType>) => {
+      state.currentTrack = action.payload.currentTrack;
       state.isPlaying = true;
     },
     clearTrack: (state) => {

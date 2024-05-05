@@ -1,15 +1,19 @@
 "use client";
-import { SessionType, TrackType } from "@/type";
+import { SessionType } from "@/type";
 import { useMusicBox } from "./hooks/useMusicBox";
-import { useEffect } from "react";
 import { FaRegCirclePlay, FaRegCirclePause } from "react-icons/fa6";
+import { useEffect } from "react";
+import { PlayerPayloadType, togglePlayPause } from "@/redux/playerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 type MusicContentProps = {
-  track: TrackType;
+  track: PlayerPayloadType;
   session: SessionType;
+  deviceId: string;
 };
 
-const MusicContent = ({ track, session }: MusicContentProps) => {
+const MusicContent = ({ track, session, deviceId }: MusicContentProps) => {
   const {
     loading,
     setLoading,
@@ -17,16 +21,12 @@ const MusicContent = ({ track, session }: MusicContentProps) => {
     playSong,
     pauseSong,
     setCurrentMusic,
+    resumeSong,
+    getCurrentTrack,
   } = useMusicBox();
 
-  console.log({ currentMusic });
-
-  // const music = await getTrack({
-  //   accessToken: session?.user?.accessToken,
-  //   id: track.id,
-  // });
-
-  // console.log({ music });
+  const isPlaying = useSelector((state: RootState) => state.player.isPlaying);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCurrentMusic = async () => {
@@ -34,7 +34,8 @@ const MusicContent = ({ track, session }: MusicContentProps) => {
       try {
         await playSong({
           accessToken: session?.user?.accessToken,
-          uris: track.uri,
+          uris: track.currentTrack?.uri || "",
+          deviceId: deviceId,
         });
       } catch (error) {
         console.error("fetch track failed:", error);
@@ -44,8 +45,7 @@ const MusicContent = ({ track, session }: MusicContentProps) => {
     };
 
     fetchCurrentMusic();
-    console.log("song =>");
-  }, [track]);
+  }, [track.currentTrack?.uri]);
 
   if (loading) {
     return (
@@ -62,24 +62,46 @@ const MusicContent = ({ track, session }: MusicContentProps) => {
         <img
           className="aspect-square w-full rounded-lg border-[2px] border-white bg-secondary-default object-cover"
           alt="music"
-          src={track.album.images[0].url}
+          src={track.currentTrack?.image}
         />
 
         {/* Information */}
         <div className="mt-5 flex w-full flex-col items-center justify-center text-black ">
           <p className="text-center text-lg  font-bold md:text-xl">
-            {track.name}
+            {track.currentTrack?.musicName}
           </p>
           <p className="text-xs text-[#b1b1b1] md:text-sm">
-            {track.artists.map((artist) => artist.name).join(", ")}
+            {track.currentTrack?.artist.map((artist) => artist).join(", ")}
           </p>
-
-          {/* Play Button */}
         </div>
 
-        <div className="mt-20 flex w-full justify-center">
-          <FaRegCirclePlay size={40} color="#2A313C" />
-          <FaRegCirclePause size={40} color="#2A313C" />
+        {/* Play Button */}
+        <div className="mt-20 flex  w-full justify-center md:mt-10 2xl:mt-16">
+          <div className="hover:cursor-pointer">
+            {isPlaying ? (
+              <FaRegCirclePause
+                onClick={async () => {
+                  await pauseSong({ accessToken: session?.user?.accessToken });
+                  dispatch(togglePlayPause());
+                }}
+                size={40}
+                color="#2A313C"
+              />
+            ) : (
+              <FaRegCirclePlay
+                onClick={async () => {
+                  await resumeSong({
+                    accessToken: session?.user?.accessToken,
+                    uris: track.currentTrack?.uri || "",
+                    position_ms: 0,
+                  });
+                  dispatch(togglePlayPause());
+                }}
+                size={40}
+                color="#2A313C"
+              />
+            )}
+          </div>
         </div>
       </div>
     </>
