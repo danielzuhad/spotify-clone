@@ -38,7 +38,7 @@ export default async function RootLayout({
       <body className={poppins.className}>
         <ProviderWrapper>
           <Layout variant="root" className="relative gap-x-2">
-            {session ? (
+            {session?.user.refreshToken ? (
               <div className="sm:flex sm:w-[350px] sm:flex-col sm:gap-2 md:w-[400px]">
                 <Title />
                 <Navbar />
@@ -48,7 +48,7 @@ export default async function RootLayout({
             <Layout variant="page" className="relative ">
               {children}
             </Layout>
-            {session && <MobileMusicBox session={session} />}
+            {session?.user.refreshToken && <MobileMusicBox session={session} />}
           </Layout>
         </ProviderWrapper>
       </body>
