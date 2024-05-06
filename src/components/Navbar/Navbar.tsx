@@ -23,7 +23,7 @@ const links: LinkType[] = [
     label: "Information",
   },
   { link: "/search", icon: <IoIosSearch size={25} />, label: "Search" },
-  { link: "/login", icon: <CiLogout size={25} />, label: "Logout" },
+  { link: "", icon: <CiLogout size={25} />, label: "Logout" },
 ];
 
 const Navbar = ({ className, ...props }: NavbarProps) => {

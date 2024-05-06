@@ -1,8 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse, type NextRequest } from "next/server";
 
-const AUTHENTICATED_ROUTES = ["/", "/profile", "/search", "/playlist/:path*"];
-
 export async function middleware(request: NextRequest) {
   const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
   const token = await getToken({
@@ -10,21 +8,19 @@ export async function middleware(request: NextRequest) {
     secret: secret,
   });
 
-  const pathnameEndsWith = (searchString: string) => {
-    return request.nextUrl.pathname.endsWith(searchString);
-  };
-  if (!pathnameEndsWith("/login")) {
-    if (!token) {
-      return NextResponse.redirect(new URL("/login", request.nextUrl));
-    }
+  const { pathname } = request.nextUrl;
+
+  if (pathname.includes("/api/auth") || token) {
+    return NextResponse.next();
   }
-  if (pathnameEndsWith("/login")) {
-    if (token) {
-      return NextResponse.redirect(new URL("/", request.nextUrl));
-    }
+
+  if (!token && pathname !== "/login") {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/profile", "/search", "/playlist/:path*"],
+  matcher: ["/", "/information", "/search", "/playlist/:path*"],
 };
