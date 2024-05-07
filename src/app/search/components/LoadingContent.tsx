@@ -1,9 +1,15 @@
 const LoadingContent = () => {
+  // Number of divs you want to create
+  const numberOfDivs = 8;
+
   return (
     <>
-      <div className="mt-4 h-40 w-full animate-pulse rounded-lg  bg-[#e8e8e893]" />
-      <div className="mt-4 h-40 w-full animate-pulse rounded-lg  bg-[#e8e8e893]" />
-      <div className="mt-4 h-40 w-full animate-pulse rounded-lg  bg-[#e8e8e893]" />
+      {Array.from({ length: numberOfDivs }, (_, index) => (
+        <div
+          key={index}
+          className="mt-4 h-20 w-full animate-pulse rounded-lg bg-[#e8e8e893]"
+        />
+      ))}
     </>
   );
 };

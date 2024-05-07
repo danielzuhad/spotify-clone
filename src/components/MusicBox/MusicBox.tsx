@@ -24,12 +24,18 @@ const MusicBox = ({ className, session, deviceId }: MusicBoxProps) => {
         )}
       >
         {/* Conditional Music Box */}
-        {track.currentTrack?.uri && (
+        {track.currentTrack?.uri ? (
           <MusicContent
             track={track}
             session={session}
-            deviceId={deviceId.devices[0].id}
+            deviceId={deviceId.devices.length > 0 ? deviceId.devices[0].id : ""}
           />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center p-1.5">
+            <p className="px-10 text-center text-xl text-[#b1b1b1]">
+              Please make sure to open ur spotify app to play music
+            </p>
+          </div>
         )}
       </div>
     </>
