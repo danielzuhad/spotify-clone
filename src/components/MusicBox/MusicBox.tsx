@@ -24,11 +24,13 @@ const MusicBox = ({ className, session, deviceId }: MusicBoxProps) => {
         )}
       >
         {/* Conditional Music Box */}
-        <MusicContent
-          track={track}
-          session={session}
-          deviceId={deviceId.devices.length > 0 ? deviceId.devices[0].id : ""}
-        />
+        {track.currentTrack?.uri && (
+          <MusicContent
+            track={track}
+            session={session}
+            deviceId={deviceId.devices.length > 0 ? deviceId.devices[0].id : ""}
+          />
+        )}
       </div>
     </>
   );
