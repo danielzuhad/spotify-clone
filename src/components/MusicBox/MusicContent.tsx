@@ -1,11 +1,12 @@
 "use client";
+
 import { SessionType } from "@/type";
 import { useMusicBox } from "./hooks/useMusicBox";
 import { FaRegCirclePlay, FaRegCirclePause } from "react-icons/fa6";
-import { useEffect } from "react";
 import { PlayerPayloadType, togglePlayPause } from "@/redux/playerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import SpotifyPlayer from "react-spotify-web-playback";
 
 type MusicContentProps = {
   track: PlayerPayloadType;
@@ -28,25 +29,6 @@ const MusicContent = ({ track, session, deviceId }: MusicContentProps) => {
   const isPlaying = useSelector((state: RootState) => state.player.isPlaying);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchCurrentMusic = async () => {
-      setLoading(true);
-      try {
-        await playSong({
-          accessToken: session?.user?.accessToken,
-          uris: track.currentTrack?.uri || "",
-          deviceId: deviceId,
-        });
-      } catch (error) {
-        console.error("fetch track failed:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCurrentMusic();
-  }, [track.currentTrack?.uri]);
-
   if (loading) {
     return (
       <div
@@ -57,10 +39,10 @@ const MusicContent = ({ track, session, deviceId }: MusicContentProps) => {
 
   return (
     <>
-      <div className="h-full w-full p-3 ">
+      <div className="flex h-full w-full flex-col items-center p-3 ">
         {/* Image */}
         <img
-          className="aspect-square w-full rounded-lg border-[2px] border-white bg-secondary-default object-cover"
+          className="aspect-square w-full rounded-lg border-[2px] border-white bg-secondary-default object-cover "
           alt="music"
           src={track.currentTrack?.image}
         />
@@ -76,7 +58,7 @@ const MusicContent = ({ track, session, deviceId }: MusicContentProps) => {
         </div>
 
         {/* Play Button */}
-        <div className="mt-20 flex  w-full justify-center md:mt-10 2xl:mt-16">
+        <div className="mt-20 flex w-full  justify-center sm:mt-20 md:mt-14 lg:mt-10">
           <div className="hover:cursor-pointer">
             {isPlaying ? (
               <FaRegCirclePause
@@ -103,6 +85,15 @@ const MusicContent = ({ track, session, deviceId }: MusicContentProps) => {
             )}
           </div>
         </div>
+      </div>
+
+      <div className="hidden">
+        <SpotifyPlayer
+          token={session?.user?.accessToken}
+          uris={track.currentTrack?.uri ? [track.currentTrack?.uri] : []}
+          play={true}
+          showSaveIcon
+        />
       </div>
     </>
   );
