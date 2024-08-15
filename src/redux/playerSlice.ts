@@ -17,7 +17,6 @@ export type PlayerStateType = {
     musicName: string;
     artist: string[];
   } | null;
-  isPlaying: boolean;
 };
 
 const initialState: PlayerStateType = {
@@ -27,7 +26,6 @@ const initialState: PlayerStateType = {
     musicName: "",
     artist: [],
   },
-  isPlaying: false,
 };
 
 const playerSlice = createSlice({
@@ -36,15 +34,11 @@ const playerSlice = createSlice({
   reducers: {
     setTrack: (state, action: PayloadAction<PlayerPayloadType>) => {
       state.currentTrack = action.payload.currentTrack;
-      state.isPlaying = true;
     },
     clearTrack: (state) => {
       state.currentTrack = null;
-      state.isPlaying = false;
     },
-    togglePlayPause: (state) => {
-      state.isPlaying = !state.isPlaying;
-    },
+    togglePlayPause: (state) => {},
   },
 });
 
@@ -52,6 +46,5 @@ export const { setTrack, clearTrack, togglePlayPause } = playerSlice.actions;
 
 export const selectCurrentTrack = (state: RootState) =>
   state.player.currentTrack;
-export const selectIsPlaying = (state: RootState) => state.player.isPlaying;
 
 export default playerSlice.reducer;

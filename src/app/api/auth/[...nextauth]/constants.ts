@@ -2,24 +2,46 @@ export const SCOPES = [
   // Users
   "user-read-email",
   "user-read-private",
-  // spotify connect
+  // "user-read-birthdate",
+
+  // Spotify Connect
   "user-read-playback-state",
   "user-modify-playback-state",
   "user-read-currently-playing",
-  // follow
+
+  // Follow
   "user-follow-modify",
   "user-follow-read",
+
   // Library
   "user-library-modify",
   "user-library-read",
-  // playlist
+
+  // Playlist
   "playlist-read-private",
   "playlist-read-collaborative",
   "playlist-modify-private",
   "playlist-modify-public",
-  // playback
+
+  // Playback
   "streaming",
+  "app-remote-control",
+
+  // Images
   "ugc-image-upload",
+
+  // Listening History
+  "user-read-playback-position",
+  "user-top-read",
+  "user-read-recently-played",
+
+  // Open Access
+  // Uncomment if needed
+  // "user-soa-link",
+  // "user-soa-unlink",
+  // "soa-manage-entitlements",
+  // "soa-manage-partner",
+  // "soa-create-partner",
 ].join(",");
 
 export const SPOTIFY_ACCOUNT = process.env.SPOTIFY_ACCOUNT;

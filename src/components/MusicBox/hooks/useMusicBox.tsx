@@ -16,11 +16,13 @@ type ResumeSongType = {
   position_ms: number;
 };
 
+type accessToken = string;
+
 export const useMusicBox = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [currentMusic, setCurrentMusic] = useState<Album | null>(null);
 
-  const getDeviceId = async ({ accessToken }: { accessToken: string }) => {
+  const getDeviceId = async (accessToken: string) => {
     const response = await axiosInstance.get("/me/player/devices", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -30,7 +32,8 @@ export const useMusicBox = () => {
     return response;
   };
 
-  const getCurrentTrack = async ({ accessToken }: { accessToken: string }) => {
+  const getCurrentTrack = async (accessToken: string) => {
+    console.log({ accessToken });
     const response = await axiosInstance.get("/me/player/currently-playing", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -61,7 +64,7 @@ export const useMusicBox = () => {
     }
   };
 
-  const pauseSong = async ({ accessToken }: { accessToken: string }) => {
+  const pauseSong = async (accessToken: string) => {
     try {
       const response = await axiosInstance.put(`/me/player/pause`, null, {
         headers: {

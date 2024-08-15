@@ -94,3 +94,28 @@ type SpotifyData = {
   uri: string;
   is_local: boolean;
 };
+
+export interface StateType {
+  currentDeviceId: string;
+  deviceId: string;
+  devices: SpotifyDevice[];
+  error: string;
+  errorType: ErrorType | null;
+  isActive: boolean;
+  isInitializing: boolean;
+  isMagnified: boolean;
+  isPlaying: boolean;
+  isSaved: boolean;
+  isUnsupported: boolean;
+  needsUpdate: boolean;
+  nextTracks: SpotifyTrack[];
+  playerPosition: "bottom" | "top";
+  position: number;
+  previousTracks: SpotifyTrack[];
+  progressMs: number;
+  repeat: RepeatState;
+  shuffle: boolean;
+  status: Status;
+  track: SpotifyTrack;
+  volume: number;
+}

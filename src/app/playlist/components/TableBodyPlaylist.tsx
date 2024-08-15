@@ -1,7 +1,6 @@
 "use client";
 import TrackItemRow from "./TrackItemRow";
 import { TrackItemType } from "@/type";
-import useTracks from "../hooks/useTracks";
 import { useDispatch } from "react-redux";
 import { PlayerPayloadType, setTrack } from "@/redux/playerSlice";
 
@@ -10,8 +9,6 @@ type TableBodyPlaylistProps = {
 };
 
 const TableBodyPlaylist = ({ track }: TableBodyPlaylistProps) => {
-  const { visibleCount, setVisibleCount, showMore, showLess } = useTracks();
-
   const dispatch = useDispatch();
 
   return (
