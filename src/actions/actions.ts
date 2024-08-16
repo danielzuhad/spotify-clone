@@ -9,6 +9,5 @@ export const getCurrentTrack = async (accessToken: string) => {
     },
   });
 
-  console.log("getCurrent", response.data);
   return response;
 };

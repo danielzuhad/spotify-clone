@@ -35,8 +35,6 @@ export default async function RootLayout({
     deviceId = deviceIdResponse ? deviceIdResponse.data : null;
   }
 
-  console.log(deviceId);
-
   return (
     <html lang="en">
       <body className={poppins.className}>

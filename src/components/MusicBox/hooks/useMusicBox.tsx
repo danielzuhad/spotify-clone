@@ -33,14 +33,12 @@ export const useMusicBox = () => {
   };
 
   const getCurrentTrack = async (accessToken: string) => {
-    console.log({ accessToken });
     const response = await axiosInstance.get("/me/player/currently-playing", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
 
-    console.log("getCurrent", response.data);
     return response;
   };
 

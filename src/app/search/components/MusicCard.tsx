@@ -1,8 +1,7 @@
 import { Variants, motion } from "framer-motion";
 import { TrackAlbum } from "../types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { PlayerPayloadType, setTrack } from "@/redux/playerSlice";
-import { RootState } from "@/redux/store";
 
 type MusicCardProps = {
   track: TrackAlbum;
@@ -11,9 +10,6 @@ type MusicCardProps = {
 
 const MusicCard = ({ track, variant }: MusicCardProps) => {
   const dispatch = useDispatch();
-  const currentTrack = useSelector(
-    (state: RootState) => state.player.currentTrack,
-  );
 
   return (
     <>
@@ -31,7 +27,7 @@ const MusicCard = ({ track, variant }: MusicCardProps) => {
           dispatch(setTrack(trackPayload));
         }}
         variants={variant}
-        className="glass flex w-full items-center justify-between rounded-md p-1 hover:cursor-pointer"
+        className="glass flex w-full items-center justify-between rounded-md p-1 transition-all hover:cursor-pointer hover:bg-[#b1b1b1]/10"
       >
         <div className="flex h-full w-full items-center gap-1">
           {/* Image */}

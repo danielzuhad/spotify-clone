@@ -3,7 +3,7 @@ import TableDataTrack from "./TableDataTrack";
 import TableRowPlaylist from "./TableRowPlaylist";
 import { IoTimeOutline } from "react-icons/io5";
 import { ComponentProps } from "react";
-import { albumName, artistName, time, title } from "../utils";
+import { albumName, artistName, time, title } from "@/app/playlist/utils";
 
 type TrackItemRowProps = ComponentProps<"div"> & {
   track: TrackItemType;
@@ -15,7 +15,7 @@ const TrackItemRow = ({ number, track, onClick }: TrackItemRowProps) => {
   return (
     <TableRowPlaylist
       onClick={onClick}
-      className="mt-2 items-center rounded-md p-2 py-4 hover:cursor-pointer hover:bg-[#b1b1b1]/10"
+      className="mt-2 items-center rounded-md p-2 py-4 backdrop-blur-sm transition-all hover:cursor-pointer  hover:bg-[#b1b1b1]/10 hover:shadow-sm "
     >
       {/* Number */}
       <TableDataTrack className="col-span-1 w-10">

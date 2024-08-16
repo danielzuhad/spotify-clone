@@ -5,19 +5,24 @@ import { PlaylistType } from "@/type";
 type Props = {
   className?: string;
   playlist?: PlaylistType;
+  showImage?: boolean;
 };
 
-const HeaderPlaylist = ({ className, playlist }: Props) => {
+const HeaderPlaylist = ({ className, playlist, showImage = true }: Props) => {
   const image = playlist?.images?.[0]?.url;
 
   return (
     <>
       <div className={cn("flex w-full gap-5", className)}>
-        <img
-          src={image}
-          alt="album-picture"
-          className="aspect-square h-max w-28 rounded-xl  border-2 border-[#dedede] max-sm:mt-2 min-[400px]:w-32 md:w-40 lg:w-56 xl:w-60"
-        />
+        {showImage ? (
+          <img
+            src={image}
+            alt="album-picture"
+            className="aspect-square h-max w-28 rounded-xl  border-2 border-[#dedede] max-sm:mt-2 min-[400px]:w-32 md:w-40 lg:w-56 xl:w-60"
+          />
+        ) : (
+          <div className=""></div>
+        )}
 
         <div className=" flex w-full flex-col justify-between text-sm md:text-lg">
           {/* Title & Desc */}

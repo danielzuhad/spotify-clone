@@ -11,7 +11,7 @@ const Home = async () => {
 
   return (
     <>
-      <TemplateWrapper className=" w-full">
+      <TemplateWrapper className=" flex w-full flex-col items-center gap-y-5">
         {session ? <Welcome user={session.user} /> : ""}
         {session ? (
           <Album accessToken={session?.user?.accessToken} />

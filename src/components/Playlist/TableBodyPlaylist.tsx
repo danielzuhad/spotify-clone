@@ -1,8 +1,8 @@
 "use client";
-import TrackItemRow from "./TrackItemRow";
 import { TrackItemType } from "@/type";
 import { useDispatch } from "react-redux";
 import { PlayerPayloadType, setTrack } from "@/redux/playerSlice";
+import TrackItemRow from "./TrackItemRow";
 
 type TableBodyPlaylistProps = {
   track: TrackItemType[];

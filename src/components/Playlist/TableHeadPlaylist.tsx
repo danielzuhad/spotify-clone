@@ -1,6 +1,6 @@
 import cn from "@/lib/cn";
-import { TABLE_HEADS } from "../constants";
 import TableRowPlaylist from "./TableRowPlaylist";
+import { TABLE_HEADS } from "@/app/playlist/constants";
 
 type TableHeadPlaylistProps = {};
 

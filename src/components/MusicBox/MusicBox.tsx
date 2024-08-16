@@ -20,41 +20,23 @@ const MusicBox = ({ className, session, deviceId }: MusicBoxProps) => {
       {track.currentTrack?.uri && (
         <div
           className={cn(
-            "absolute bottom-6 z-10 flex w-full justify-center   sm:bottom-0 sm:pr-2",
+            "absolute bottom-6 z-10 flex w-full justify-center max-sm:px-2   sm:bottom-0 sm:pr-2",
           )}
-          // style={{
-          //   backgroundImage: `url(${track.currentTrack?.image})`,
-          //   backgroundSize: "cover", // Agar gambar mengisi background dengan baik
-          //   backgroundPosition: "center", // Agar gambar berada di tengah
-          // }}
         >
-          <div
-            className="glass w-full rounded-md "
-            // style={{
-            //   backgroundImage: `url(${track.currentTrack?.image})`,
-            //   backgroundSize: "cover", // Agar gambar mengisi background dengan baik
-            //   backgroundPosition: "center", // Agar gambar berada di tengah
-            // }}
-          >
-            <div className="  w-full rounded-md px-3 shadow-lg backdrop-blur-3xl">
-              <div className="w-full rounded-md ">
-                <SpotifyWebPlayer
-                  styles={{
-                    bgColor: "transparent",
-                    height: 100,
-                  }}
-                  token={session?.user?.accessToken}
-                  uris={
-                    track.currentTrack?.uri ? [track.currentTrack?.uri] : []
-                  }
-                  play={true}
-                  initialVolume={0.2}
-                  inlineVolume={true}
-                  showSaveIcon
-                  syncExternalDevice={true}
-                />
-              </div>
-            </div>
+          <div className=" glass w-full  rounded-md px-3 shadow-lg  ">
+            <SpotifyWebPlayer
+              styles={{
+                bgColor: "transparent",
+                height: 100,
+              }}
+              token={session?.user?.accessToken}
+              uris={track.currentTrack?.uri ? [track.currentTrack?.uri] : []}
+              play={true}
+              initialVolume={0.2}
+              inlineVolume={true}
+              showSaveIcon
+              syncExternalDevice={true}
+            />
           </div>
         </div>
       )}

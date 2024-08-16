@@ -3,8 +3,8 @@ import "@/app/globals.css";
 import { SessionType, TrackItemType } from "@/type";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { usePlaylist } from "../hooks/usePlaylist";
-import HeaderPlaylist from "../components/HeaderPlaylist";
-import ContentPlaylist from "../components/ContentPlaylist";
+import HeaderPlaylist from "@/components/Playlist/HeaderPlaylist";
+import ContentPlaylist from "@/components/Playlist/ContentPlaylist";
 
 type Props = {
   params: {
