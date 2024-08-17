@@ -1,108 +1,43 @@
-"use client";
-
 import { axiosInstance } from "@/lib/spotify-api";
-import { useState } from "react";
-import { Album } from "../types";
+import { SessionType } from "@/type";
+import { useEffect, useState } from "react";
 
-type GetTrackType = {
-  accessToken: string;
-  uris: string;
-  deviceId: string;
-};
+interface useMusicBoxProps {
+  session: SessionType;
+}
 
-type ResumeSongType = {
-  accessToken: string;
-  uris: string;
-  position_ms: number;
-};
+const useMusicBox = ({ session }: useMusicBoxProps) => {
+  const [isAvailable, setIsAvailable] = useState<boolean>(false);
 
-type accessToken = string;
-
-export const useMusicBox = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [currentMusic, setCurrentMusic] = useState<Album | null>(null);
-
-  const getDeviceId = async (accessToken: string) => {
-    const response = await axiosInstance.get("/me/player/devices", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    return response;
-  };
-
-  const getCurrentTrack = async (accessToken: string) => {
-    const response = await axiosInstance.get("/me/player/currently-playing", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    return response;
-  };
-
-  const playSong = async ({ accessToken, uris, deviceId }: GetTrackType) => {
+  // Function to check the current playback state
+  const checkPlaybackState = async () => {
     try {
-      const response = await axiosInstance.put(
-        `/me/player/play?device_id=${deviceId}`,
-        {
-          uris: [uris],
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      );
-      return response;
-    } catch (error) {
-      console.error("Error fetching track:", error);
-      throw error;
-    }
-  };
-
-  const pauseSong = async (accessToken: string) => {
-    try {
-      const response = await axiosInstance.put(`/me/player/pause`, null, {
+      const response = await axiosInstance.get("/me/player", {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${session?.user?.accessToken}`,
         },
       });
-      return response;
+      const activeDevice = response.data.device;
+
+      if (activeDevice && activeDevice.name === "Spotify Web Player") {
+        setIsAvailable(true);
+      } else {
+        setIsAvailable(false);
+      }
     } catch (error) {
-      console.error("Error fetching track:", error);
-      throw error;
+      console.error("Error fetching playback state:", error);
     }
   };
 
-  const resumeSong = async ({
-    accessToken,
-    position_ms,
-    uris,
-  }: ResumeSongType) => {
-    try {
-      const response = await axiosInstance.put(`/me/player/play`, null, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      return response;
-    } catch (error) {
-      console.error("Error fetching track:", error);
-      throw error;
-    }
-  };
+  useEffect(() => {
+    // Polling every 5 seconds
+    const interval = setInterval(checkPlaybackState, 10000);
+    return () => clearInterval(interval);
+  }, [session?.user?.accessToken]);
 
   return {
-    playSong,
-    loading,
-    setLoading,
-    setCurrentMusic,
-    currentMusic,
-    pauseSong,
-    getCurrentTrack,
-    resumeSong,
-    getDeviceId,
+    isAvailable,
   };
 };
+
+export default useMusicBox;

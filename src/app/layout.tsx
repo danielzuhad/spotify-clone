@@ -35,6 +35,8 @@ export default async function RootLayout({
     deviceId = deviceIdResponse ? deviceIdResponse.data : null;
   }
 
+  console.log(deviceId?.devices);
+
   return (
     <html lang="en">
       <body className={poppins.className}>
@@ -49,9 +51,7 @@ export default async function RootLayout({
             <Layout variant="page" className="relative ">
               {children}
             </Layout>
-            {deviceId && session ? (
-              <MusicBox deviceId={deviceId} session={session} />
-            ) : null}
+            {deviceId && session ? <MusicBox session={session} /> : null}
           </Layout>
         </ProviderWrapper>
       </body>

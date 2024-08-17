@@ -40,7 +40,7 @@ const Navbar = ({ className, ...props }: NavbarProps) => {
     <>
       <div
         className={cn(
-          "glass fixed bottom-0 left-[-1px] z-10 flex w-full justify-evenly rounded-md    sm:relative sm:h-max sm:flex-col sm:items-center  sm:justify-start sm:gap-y-[15px] sm:rounded-lg sm:bg-none sm:p-3 sm:py-5  sm:shadow-sm md:py-8 ",
+          "glass fixed bottom-0 left-[-1px] z-10 flex w-full justify-evenly     sm:relative sm:h-max sm:flex-col sm:items-center  sm:justify-start sm:gap-y-[15px] sm:rounded-lg sm:bg-none sm:p-3 sm:py-5  sm:shadow-sm md:py-8 ",
           className,
         )}
       >

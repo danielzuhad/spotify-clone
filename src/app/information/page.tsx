@@ -1,7 +1,7 @@
 const Information = async () => {
   return (
     <>
-      <div className="flex h-full w-full flex-col items-center  pb-12">
+      <div className="flex h-full w-full flex-col items-center ">
         <div className="mt-12 flex w-full flex-col items-center lg:w-[80%] xl:w-[70%] ">
           <h1 className="text-center text-3xl font-semibold lg:text-4xl">
             Information
@@ -19,6 +19,7 @@ const Information = async () => {
 
           <ul className="ml-12 w-full list-disc text-start text-[#878787fc]">
             <li>Show your current libraries</li>
+            <li>Show your liked songs</li>
             <li>Discover new musics</li>
           </ul>
         </div>

@@ -5,7 +5,7 @@ import React from "react";
 const layoutVariants = cva(" relative flex", {
   variants: {
     variant: {
-      root: "container overflow-hidden sm:p-1 pr-1",
+      root: "container overflow-hidden sm:p-1 pr-2",
       page: "w-full h-[95vh] flex-col overflow-y-auto ",
     },
   },

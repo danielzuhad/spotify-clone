@@ -1,10 +1,11 @@
 import { getServerSession } from "next-auth";
 import "@/app/globals.css";
-import { SessionType, TrackItemType } from "@/type";
+import { SessionType } from "@/type";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { usePlaylist } from "../hooks/usePlaylist";
 import HeaderPlaylist from "@/components/Playlist/HeaderPlaylist";
 import ContentPlaylist from "@/components/Playlist/ContentPlaylist";
+import { TrackItemType } from "@/types/playlist";
 
 type Props = {
   params: {

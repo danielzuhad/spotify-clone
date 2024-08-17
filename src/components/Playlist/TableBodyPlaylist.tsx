@@ -1,8 +1,8 @@
 "use client";
-import { TrackItemType } from "@/type";
 import { useDispatch } from "react-redux";
 import { PlayerPayloadType, setTrack } from "@/redux/playerSlice";
 import TrackItemRow from "./TrackItemRow";
+import { TrackItemType } from "@/types/playlist";
 
 type TableBodyPlaylistProps = {
   track: TrackItemType[];
@@ -12,8 +12,8 @@ const TableBodyPlaylist = ({ track }: TableBodyPlaylistProps) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="mt-2 max-sm:pb-32">
-      <div>
+    <div className=" max-sm:pb-32">
+      <div className="h-full w-full ">
         {track.map((item, index) => (
           <TrackItemRow
             onClick={() => {
@@ -29,13 +29,20 @@ const TableBodyPlaylist = ({ track }: TableBodyPlaylistProps) => {
               dispatch(setTrack(trackPayload));
             }}
             key={index}
-            number={index + 1}
+            index={index + 1}
             track={item}
           />
         ))}
       </div>
+    </div>
+  );
+};
 
-      {/* {track.length < 10 ? null : (
+export default TableBodyPlaylist;
+
+// filter limit
+{
+  /* {track.length < 10 ? null : (
         <div className="flex w-full pb-5 pt-7 text-[#b1b1b1]">
           <button
             onClick={() =>
@@ -46,9 +53,5 @@ const TableBodyPlaylist = ({ track }: TableBodyPlaylistProps) => {
             {visibleCount < track.length ? "Show More" : "Show Less"}
           </button>
         </div>
-      )} */}
-    </div>
-  );
-};
-
-export default TableBodyPlaylist;
+      )} */
+}

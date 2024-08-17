@@ -18,7 +18,7 @@ const TemplateWrapper = ({ children, className }: TemplateWrapperProps) => {
         transition={{ type: "easeIn", duration: 0.5 }}
         initial="initial"
         animate="animate"
-        className={cn("glass h-full w-full rounded-lg p-3", className)}
+        className={cn("glass h-full w-full rounded-lg p-3 ", className)}
       >
         {children}
       </motion.div>
