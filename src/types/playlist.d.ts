@@ -1,3 +1,5 @@
+import { AlbumType, ArtistType } from "@/type";
+
 // from general album
 export type TrackType = {
   album: AlbumType;

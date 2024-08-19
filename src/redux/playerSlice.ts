@@ -1,31 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { TrackType } from "@/types/track";
 
-export type PlayerPayloadType = {
-  currentTrack: {
-    uri: string;
-    image: string;
-    musicName: string;
-    artist: string[];
-  } | null;
-};
+export type PlayerPayloadType = TrackType[];
 
 export type PlayerStateType = {
-  currentTrack: {
-    uri: string;
-    image: string;
-    musicName: string;
-    artist: string[];
-  } | null;
+  track: TrackType[];
 };
 
 const initialState: PlayerStateType = {
-  currentTrack: {
-    uri: "",
-    image: "",
-    musicName: "",
-    artist: [],
-  },
+  track: [],
 };
 
 const playerSlice = createSlice({
@@ -33,10 +17,10 @@ const playerSlice = createSlice({
   initialState,
   reducers: {
     setTrack: (state, action: PayloadAction<PlayerPayloadType>) => {
-      state.currentTrack = action.payload.currentTrack;
+      state.track = [...action.payload.map((track) => track)];
     },
     clearTrack: (state) => {
-      state.currentTrack = null;
+      state.track = [];
     },
     togglePlayPause: (state) => {},
   },
@@ -44,7 +28,6 @@ const playerSlice = createSlice({
 
 export const { setTrack, clearTrack, togglePlayPause } = playerSlice.actions;
 
-export const selectCurrentTrack = (state: RootState) =>
-  state.player.currentTrack;
+export const selectTrack = (state: RootState) => state.player.track;
 
 export default playerSlice.reducer;

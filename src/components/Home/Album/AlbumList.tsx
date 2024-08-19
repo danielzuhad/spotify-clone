@@ -21,7 +21,7 @@ const AlbumList = async ({ className, datas }: Props) => {
     <>
       <div
         className={cn(
-          " flex max-h-full w-full flex-wrap justify-between overflow-y-auto rounded-md xl:gap-5",
+          " flex max-h-full w-full flex-wrap justify-between overflow-y-auto rounded-md pb-48 sm:pb-24 xl:gap-5",
           className,
         )}
       >

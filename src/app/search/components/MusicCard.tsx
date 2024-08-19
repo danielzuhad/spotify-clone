@@ -1,7 +1,7 @@
 import { Variants, motion } from "framer-motion";
 import { TrackAlbum } from "../types";
-import { useDispatch } from "react-redux";
-import { PlayerPayloadType, setTrack } from "@/redux/playerSlice";
+import { TrackType } from "@/types/track";
+import useSetTrack from "@/hooks/useSetTrack";
 
 type MusicCardProps = {
   track: TrackAlbum;
@@ -9,23 +9,19 @@ type MusicCardProps = {
 };
 
 const MusicCard = ({ track, variant }: MusicCardProps) => {
-  const dispatch = useDispatch();
+  const setTrack = useSetTrack();
+
+  const trackPayload: TrackType = {
+    uri: track.uri,
+    image: track.album.images[0].url,
+    musicName: track.name,
+    artist: track.album.artists.map((artist) => artist.name),
+  };
 
   return (
     <>
       <motion.div
-        onClick={() => {
-          const trackPayload: PlayerPayloadType = {
-            currentTrack: {
-              artist: track.album.artists.map((artist) => artist.name),
-              image: track.album.images[0].url,
-              musicName: track.name,
-              uri: track.uri,
-            },
-          };
-
-          dispatch(setTrack(trackPayload));
-        }}
+        onClick={() => setTrack([trackPayload])}
         variants={variant}
         className="glass flex w-full items-center justify-between rounded-md p-1 transition-all hover:cursor-pointer hover:bg-[#b1b1b1]/10"
       >

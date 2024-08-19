@@ -15,32 +15,34 @@ type MusicBoxProps = ComponentProps<"div"> & {
 const MusicBox = ({ className, session }: MusicBoxProps) => {
   const track = useSelector((state: RootState) => state.player);
 
-  // const { isAvailable } = useMusicBox({ session });
-
-  // console.log({ isAvailable });
+  console.log({ track });
 
   return (
     <>
-      {track.currentTrack?.uri && (
+      {track.track.length > 0 && (
         <div
           className={cn(
             "absolute bottom-11 z-10 flex w-full justify-center max-sm:px-2   sm:bottom-0 sm:pr-2",
             className,
           )}
         >
-          <div className=" glass w-full  rounded-md px-3 shadow-lg  ">
+          <div className=" glass w-full rounded-md  px-3 shadow-lg backdrop-blur-3xl  ">
             <SpotifyWebPlayer
               styles={{
                 bgColor: "transparent",
                 height: 100,
               }}
               token={session?.user?.accessToken}
-              uris={track.currentTrack?.uri ? [track.currentTrack?.uri] : []}
+              uris={
+                track.track ? [...track.track.map((track) => track.uri)] : []
+              }
               play={true}
               initialVolume={0.2}
               inlineVolume={true}
-              showSaveIcon={false}
+              // showSaveIcon={false}
               hideAttribution={true}
+
+              // magnifySliderOnHover
             />
           </div>
         </div>
