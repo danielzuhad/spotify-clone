@@ -15,8 +15,6 @@ type MusicBoxProps = ComponentProps<"div"> & {
 const MusicBox = ({ className, session }: MusicBoxProps) => {
   const track = useSelector((state: RootState) => state.player);
 
-  console.log({ track });
-
   return (
     <>
       {track.track.length > 0 && (
