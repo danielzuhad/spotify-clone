@@ -26,6 +26,8 @@ export default async function RootLayout({
 }) {
   const session: SessionType | null = await getServerSession(authOptions);
 
+  console.log({ session });
+
   let deviceId: DeviceType | null = null;
 
   if (session?.user?.accessToken) {

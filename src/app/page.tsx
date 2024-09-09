@@ -9,10 +9,14 @@ import { authOptions } from "./api/auth/[...nextauth]/options";
 const Home = async () => {
   const session: SessionType | null = await getServerSession(authOptions);
 
+  if (!session) {
+    return <LoadingSection />;
+  }
+
   return (
     <>
       <TemplateWrapper className=" flex w-full flex-col items-center gap-y-5">
-        {session ? <Welcome user={session.user} /> : ""}
+        <Welcome user={session.user} />
         {session ? (
           <Album accessToken={session?.user?.accessToken} />
         ) : (
